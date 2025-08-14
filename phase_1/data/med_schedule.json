@@ -1,0 +1,15 @@
+[
+  {
+    "user_id": "user123",
+    "medication_name": "Metformin",
+    "dosage": "500mg",
+    "time": "08:00 AM"
+  },
+  {
+    "user_id": "user123",
+    "medication_name": "Amlodipine",
+    "dosage": "10mg",
+    "time": "08:00 PM"
+  }
+]
+
