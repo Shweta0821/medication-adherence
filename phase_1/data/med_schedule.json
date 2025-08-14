@@ -1,15 +1,125 @@
 [
   {
-    "user_id": "user123",
-    "medication_name": "Metformin",
+    "medication_id": "MED001",
+    "user_id": "U001",
+    "name": "John Doe",
+    "medication": "Metformin",
     "dosage": "500mg",
-    "time": "08:00 AM"
+    "frequency": "Twice daily",
+    "time": ["08:00", "20:00"],
+    "timezone": "America/Los_Angeles",
+    "start_date": "2025-08-14",
+    "end_date": "2025-11-14"
   },
   {
-    "user_id": "user123",
-    "medication_name": "Amlodipine",
+    "medication_id": "MED002",
+    "user_id": "U002",
+    "name": "Jane Smith",
+    "medication": "Lisinopril",
     "dosage": "10mg",
-    "time": "08:00 PM"
+    "frequency": "Daily",
+    "time": ["09:30"],
+    "timezone": "America/New_York",
+    "start_date": "2025-08-13",
+    "end_date": "2025-10-13"
+  },
+  {
+    "medication_id": "MED003",
+    "user_id": "U003",
+    "name": "Robert Johnson",
+    "medication": "Levothyroxine",
+    "dosage": "75mcg",
+    "frequency": "Daily",
+    "time": ["07:00"],
+    "timezone": "America/Chicago",
+    "start_date": "2025-08-13",
+    "end_date": "2025-12-13"
+  },
+  {
+    "medication_id": "MED004",
+    "user_id": "U004",
+    "name": "Emily Davis",
+    "medication": "Atorvastatin",
+    "dosage": "20mg",
+    "frequency": "Daily at night",
+    "time": ["21:00"],
+    "timezone": "America/Denver",
+    "start_date": "2025-08-14",
+    "end_date": "2025-09-14"
+  },
+  {
+    "medication_id": "MED005",
+    "user_id": "U005",
+    "name": "Michael Brown",
+    "medication": "Amlodipine",
+    "dosage": "5mg",
+    "frequency": "Daily",
+    "time": ["08:15"],
+    "timezone": "America/Los_Angeles",
+    "start_date": "2025-08-15",
+    "end_date": "2025-11-15"
+  },
+  {
+    "medication_id": "MED006",
+    "user_id": "U006",
+    "name": "Sarah Wilson",
+    "medication": "Sertraline",
+    "dosage": "50mg",
+    "frequency": "Daily",
+    "time": ["07:45"],
+    "timezone": "America/New_York",
+    "start_date": "2025-08-13",
+    "end_date": "2025-12-13"
+  },
+  {
+    "medication_id": "MED007",
+    "user_id": "U007",
+    "name": "David Martinez",
+    "medication": "Omeprazole",
+    "dosage": "40mg",
+    "frequency": "Once daily before breakfast",
+    "time": ["06:30"],
+    "timezone": "America/Chicago",
+    "start_date": "2025-08-14",
+    "end_date": "2025-09-14"
+  },
+  {
+    "medication_id": "MED008",
+    "user_id": "U008",
+    "name": "Laura Taylor",
+    "medication": "Warfarin",
+    "dosage": "5mg",
+    "frequency": "Daily in the evening",
+    "time": ["20:00"],
+    "timezone": "America/Denver",
+    "start_date": "2025-08-13",
+    "end_date": "2025-10-13"
+  },
+  {
+    "medication_id": "MED009",
+    "user_id": "U009",
+    "name": "James Anderson",
+    "medication": "Insulin Glargine",
+    "dosage": "15 units",
+    "frequency": "Daily at bedtime",
+    "time": ["22:00"],
+    "timezone": "America/Los_Angeles",
+    "start_date": "2025-08-13",
+    "end_date": "2025-09-30"
+  },
+  {
+    "medication_id": "MED010",
+    "user_id": "U010",
+    "name": "Olivia Thomas",
+    "medication": "Metoprolol",
+    "dosage": "25mg",
+    "frequency": "Twice daily",
+    "time": ["07:30", "19:30"],
+    "timezone": "America/New_York",
+    "start_date": "2025-08-14",
+    "end_date": "2025-11-14"
   }
 ]
+
+
 
