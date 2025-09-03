@@ -1,28 +1,38 @@
 [
   {
-    "medication_id": "MED001",
-    "user_id": "U001",
-    "name": "John Doe",
-    "medication": "Metformin",
-    "dosage": "500mg",
-    "frequency": "Twice daily",
-    "time": ["08:00", "20:00"],
-    "timezone": "America/Los_Angeles",
-    "start_date": "2025-08-14",
-    "end_date": "2025-11-14"
+  "UserID": {
+    "S": "Ron"
   },
+  "MedicationTime": {
+    "S": "20:25"
+  },
+  "Contact": {
+    "S": "shwetagadewar@gmail.com"
+  },
+  "Dosage": {
+    "S": "500mg"
+  },
+  "MedicationName": {
+    "S": "Metformin"
+  }
+},
   {
-    "medication_id": "MED002",
-    "user_id": "U002",
-    "name": "Jane Smith",
-    "medication": "Lisinopril",
-    "dosage": "10mg",
-    "frequency": "Daily",
-    "time": ["09:30"],
-    "timezone": "America/New_York",
-    "start_date": "2025-08-13",
-    "end_date": "2025-10-13"
+  "UserID": {
+    "S": "John"
   },
+  "MedicationTime": {
+    "S": "20:30"
+  },
+  "Contact": {
+    "S": "shwetagadewar@gmail.com"
+  },
+  "Dosage": {
+    "S": "365mg"
+  },
+  "MedicationName": {
+    "S": "Iron"
+  }
+}/*,
   {
     "medication_id": "MED003",
     "user_id": "U003",
@@ -118,7 +128,7 @@
     "timezone": "America/New_York",
     "start_date": "2025-08-14",
     "end_date": "2025-11-14"
-  }
+  }*/
 ]
 
 
