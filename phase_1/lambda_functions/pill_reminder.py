@@ -2,7 +2,7 @@ import json
 
 import boto3
 import datetime
-from zoneinfo import ZoneInfo  # built-in, no need to install
+from zoneinfo import ZoneInfo
 
 dynamodb = boto3.resource('dynamodb')
 sns = boto3.client('sns')
