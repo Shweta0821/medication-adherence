@@ -8,7 +8,7 @@ dynamodb = boto3.resource('dynamodb')
 sns = boto3.client('sns')
 
 TABLE_NAME = "MedicationSchedules"
-TOPIC_ARN = "arn:aws:sns:us-east-1:342593763220:PillReminderTopic"  # Replace with your ARN
+TOPIC_ARN = "arn:aws:sns:us-east-1:908878675:PillReminderTopic"  # Replace with your ARN
 
 def lambda_handler(event, context):
     table = dynamodb.Table(TABLE_NAME)
