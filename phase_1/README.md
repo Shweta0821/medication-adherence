@@ -13,7 +13,7 @@
 6. Test End-to-End
 
 **What happens:**
-Lambda runs at 10:00 → finds user1’s row → publishes “Reminder: Metformin D at 10:00” to SNS → you get an email.
+Lambda runs at 10:00 → finds user1’s row → publishes “Reminder: Metformin at 10:00” to SNS → you get an email.
 
 **What you achieve**
 A fully working automated reminder system where users get SMS/email notifications at their medication times.
