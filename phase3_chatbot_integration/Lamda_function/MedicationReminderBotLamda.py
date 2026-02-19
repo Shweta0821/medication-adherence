@@ -7,7 +7,6 @@ from datetime import datetime
 from boto3.dynamodb.conditions import Key
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
-
 # ======================================================
 # SETUP
 # ======================================================
@@ -18,10 +17,9 @@ dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("MedicationReminderBot")
 
 # sns = boto3.client("sns")
-# SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:342593763220:MedicationReminderBotTopic" # Ensure this is your actual ARN
+# SNS_TOPIC_ARN = "YOUR_ARN" # Ensure this is your actual ARN
 # Initialize clients
 ses = boto3.client("ses", region_name="us-east-1")
-
 # ======================================================
 # MAIN HANDLER
 # ======================================================
@@ -56,9 +54,7 @@ def lambda_handler(event, context):
         if invocation_source == "FulfillmentCodeHook":
             return handle_add_fulfillment(slots)
 
-
     return close(intent_name, "Fulfilled", "I'm sorry, something went wrong.")
-
 # ======================================================
 # ADD MEDICATION — DIALOG
 # ======================================================
@@ -85,7 +81,6 @@ def handle_add_dialog(slots):
                 return elicit_slot("CreateMedicationReminderIntent", "med_time_3", "What is the third dose time?", slots)
 
 
-
     # --- SAVE LOGIC ---
     # If med details are in but we haven't asked "add_more" yet, save and ask.
     if (get(slots, "med_name") and get(slots, "med_frequency") and
@@ -101,10 +96,7 @@ def handle_add_dialog(slots):
             slots
         )
 
-
     return delegate("CreateMedicationReminderIntent", slots)
-
-
 # ======================================================
 # ADD MEDICATION — FULFILLMENT
 # ======================================================
@@ -117,7 +109,6 @@ def handle_add_fulfillment(slots):
         f"All your medications have been saved. Notifications will be sent to {email}.\n Choose an action below: View Medication or Stop Medication."
     )
 
-
 # ======================================================
 # RESET FOR NEXT MEDICATION (THE FIX)
 # ======================================================
@@ -129,7 +120,6 @@ def reset_for_next_med(slots):
     user_name_obj = slots.get("user_name")
     email_obj = slots.get("email")
     timezone_obj = slots.get("timezone")
-
 
     # Construct clean slot map
     # Setting a slot to None (null) tells Lex it needs to be filled again.
@@ -145,7 +135,6 @@ def reset_for_next_med(slots):
         "med_duration": None,
         "add_more": None
     }
-
 
 
     return {
@@ -167,7 +156,6 @@ def reset_for_next_med(slots):
             }
         ]
     }
-
 
 
 def save_or_update(slots):
@@ -218,12 +206,10 @@ def save_or_update(slots):
             "EmailSubscribed": already_subscribed
         })
 
-
     # 4. Trigger SES onboarding if this is the user's first time
     if not already_subscribed:
         # Pass 'items' here instead of 'existing_items'
         verify_ses_email_once(email, rid, items)
-
 
 def verify_ses_email_once(email, rid, existing_items):
     """
@@ -255,7 +241,6 @@ def verify_ses_email_once(email, rid, existing_items):
         logger.error(f"SES Identity Verification Error for {email}: {e}")
 
 
-
 def handle_view(slots):
     email = get(slots, "email")
     if not email: return delegate("ViewMedicationReminders", slots)
@@ -276,11 +261,9 @@ def handle_stop(slots):
     med_name = get(slots, "med_name")
     confirm = get(slots, "confirm_stop")
 
-
     # 1. Require Email
     if not email:
         return delegate("StopMedicationReminder", slots)
-
 
     # 2. Get active meds from DB
     try:
@@ -290,7 +273,6 @@ def handle_stop(slots):
     except Exception as e:
         logger.error(f"DB Error: {e}")
         return close("StopMedicationReminder", "Failed", "I couldn't access your reminders right now.")
-
 
     if not active:
         return close("StopMedicationReminder", "Fulfilled", "You don't have any active medication reminders to stop.")
@@ -305,11 +287,9 @@ def handle_stop(slots):
             slots
         )
 
-
     # 4. Find the specific item (Case-insensitive & Safe)
     # Using .get() prevents KeyError if an item is corrupted
     item = next((i for i in active if str(i.get("MedicationName", "")).lower() == str(med_name).lower()), None)
-
 
     if not item:
         med_list = ", ".join([m.get('MedicationName', 'Unknown') for m in active])
@@ -333,7 +313,6 @@ def handle_stop(slots):
     if str(confirm).lower() in ["denied", "no", "false"]:
         return close("StopMedicationReminder", "Fulfilled", f"Okay, I've kept your {item.get('MedicationName')} reminders active.")
 
-
     # 6. Perform the Stop
     try:
         table.update_item(
@@ -355,13 +334,11 @@ def get(slots, name):
     if not slot or not slot.get("value"): return None
     return slot["value"].get("interpretedValue") or slot["value"].get("resolvedValues", [None])[0]
 
-
 def validate_slots(slots):
     email = get(slots, "email")
     if email and not re.match(r"[^@]+@[^@]+\.[^@]+", email):
         return {"isValid": False, "violatedSlot": "email", "message": "Please enter a valid email."}
     return {"isValid": True}
-
 
 def elicit_slot(intent, slot, message, slots):
     return {
@@ -372,7 +349,6 @@ def elicit_slot(intent, slot, message, slots):
         "messages": [{"contentType": "PlainText", "content": message}]
     }
 
-
 def delegate(intent, slots):
     return {
         "sessionState": {
@@ -380,7 +356,6 @@ def delegate(intent, slots):
             "intent": {"name": intent, "state": "InProgress", "slots": slots}
         }
     }
-
 
 def close(intent, state, message):
     return {
