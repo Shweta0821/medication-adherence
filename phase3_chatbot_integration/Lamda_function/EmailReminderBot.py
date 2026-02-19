@@ -7,13 +7,11 @@ try:
    from zoneinfo import ZoneInfo 
 except ImportError: 
    from backports.zoneinfo import ZoneInfo # For older Python runtimes
-
 # ======================================================
 # CONFIG
 # ======================================================
 
-TABLE_NAME = "MedicationReminders"
-# SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:381414049366:PillReminderBot"
+TABLE_NAME = "MedicationReminderBot"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -22,11 +20,9 @@ dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table(TABLE_NAME)
 
 ses = boto3.client("ses")
-
 # ======================================================
 # MAIN HANDLER (EventBridge → UTC)
 # ======================================================
-
 def lambda_handler(event, context):
     logger.info("Lambda triggered")
     logger.info(event)
@@ -54,11 +50,9 @@ def lambda_handler(event, context):
         "status": "completed",
         "checked": len(items)
     }
-
 # ======================================================
 # PROCESS EACH REMINDER
 # ======================================================
-
 def process_reminder(item, utc_now):
     email = item["UserEmail"]
     med_name = item["MedicationName"]
@@ -77,17 +71,14 @@ def process_reminder(item, utc_now):
     duration_days = int(item["DurationDays"])
     end_date = start_date + timedelta(days=duration_days)
 
-
     if not (start_date <= current_date < end_date):
         return  # Outside duration window
-
     # Time match
     if current_time_str not in reminder_times:
         return
 
     # SEND EMAIL
     send_email(email, med_name, current_time_str, timezone_name)
-
 # ======================================================
 # SES EMAIL
 # ======================================================
@@ -96,7 +87,7 @@ logger.setLevel(logging.INFO)
 
 ses = boto3.client("ses", region_name="us-east-1")  # change region if needed
 
-SENDER_EMAIL = "YOUR_Email_ID"  # must be verified in SES
+SENDER_EMAIL = "Sender_Email_ID"  # must be verified in SES
 
 def send_email(email, medication, time_str, tz):
     subject = "Medication Reminder"
@@ -128,7 +119,6 @@ def send_email(email, medication, time_str, tz):
                 }
             }
         )
-
 
         logger.info(f"Email sent to {email} for {medication}. MessageId={response['MessageId']}")
 
